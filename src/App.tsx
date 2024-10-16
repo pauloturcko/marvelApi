@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themes/theme';
 import GlobalStyle from './styles/GlobalStyles';
-import Header from './components/organisms/header';
+import Header from './components/organisms/Header';
 
 
 const App: React.FC = () => {

@@ -7,10 +7,12 @@ const LogoText = styled.a`
   font-size: 2rem;
   cursor: pointer;
   text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
 `;
 
 const Logo: React.FC = () => {
-  return <LogoText href="#">universo marvel_</LogoText>;
+  return <LogoText href="#">universo<br/>marvel_</LogoText>;
 };
 
 export default Logo;

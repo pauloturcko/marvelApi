@@ -14,7 +14,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.colors.textColor02};
     font-family: ${(props) => props.theme.fonts.main};
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    margin: 0 150px;
     padding: 0;
   }
 
