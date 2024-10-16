@@ -1,6 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+export interface Hero {
+    id: number;
+    name: string;
+    thumbnail: {
+      path: string;
+      extension: string;
+    };
+  }
+
 const CardContainer = styled.div`
     width: 260px;
     border: none;
@@ -18,7 +27,7 @@ const CardContainer = styled.div`
 `;
 
 const HeroImage = styled.img`
-    width: 90%;
+    width: 100%;
     height: 346px;
     object-fit: cover;
 `;
@@ -30,12 +39,15 @@ const HeroButton = styled.button`
   padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
-  width: 90%;
+  width: 100%;
   text-align: center;
   transition: background-color 0.3s ease-in-out;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.hoverColor};
+    color: ${({ theme }) => theme.colors.mainColor};
+    font-weight: bold;
+    border: 2px solid ${({ theme }) => theme.colors.mainColor};
   }
 `;
 
@@ -46,7 +58,7 @@ interface CardProps {
 
 const HeroCard: React.FC<CardProps> = ({ imageUrl, heroName }) => {
     return (
-        <CardContainer>
+        <CardContainer style={{ gap: '10px' }}>
             <HeroImage src={imageUrl} alt={heroName} />
             <HeroButton>{heroName}</HeroButton>
         </CardContainer>
