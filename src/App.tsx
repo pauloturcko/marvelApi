@@ -1,11 +1,23 @@
-import React from "react";
-import { ThemeProvider } from "styled-components";
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './themes/theme';
+import GlobalStyle from './styles/GlobalStyles';
+import Header from './components/organisms/header';
 
-function App() {
+
+const App: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <div>
-    </div>
-  )
-}
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+    </ThemeProvider>
+  );
+};
 
 export default App
