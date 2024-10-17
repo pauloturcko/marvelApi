@@ -9,6 +9,20 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.alternativeColor};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.mainColor};
+    width: 100%;
+    height: 20%;
+  }
+
   body {
     background-color: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.textColor02};

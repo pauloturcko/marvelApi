@@ -16,7 +16,7 @@ const CardContainer = styled.div`
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
