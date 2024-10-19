@@ -5,7 +5,7 @@ import GlobalStyle from './styles/GlobalStyles';
 import Header from './components/organisms/Header';
 import HeroList from './components/molecules/HeroList';
 import Loader from './components/atoms/Loader';
-import { fetchHeroes } from './services/heroService';
+import { getMarvelData } from './api/marvelApi'; 
 import { debounce } from 'lodash';
 import { Hero } from './components/molecules/HeroCard';
 
@@ -25,7 +25,10 @@ const App: React.FC = () => {
     if (loading) return;
     setLoading(true);
     try {
-      const newHeroes = await fetchHeroes(pageNumber);
+      const newHeroes = await getMarvelData('characters', `&offset=${pageNumber * 20}&limit=20`);
+
+      console.log('Retorno da API:', newHeroes);
+
       setHeroes((prevHeroes) => [...prevHeroes, ...newHeroes]);
       setHasMore(newHeroes.length > 0);
     } catch (error) {
