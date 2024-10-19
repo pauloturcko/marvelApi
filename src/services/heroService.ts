@@ -6,6 +6,8 @@ export const fetchHeroes = async (pageNumber: number): Promise<Hero[]> => {
   const offset = pageNumber * limit;
   const data = await getMarvelData('characters', `&limit=${limit}&offset=${offset}`);
 
+  console.log('Dados retornados pela API:', data);
+
   return data.data.results.map((hero: Hero) => ({
     id: hero.id,
     name: hero.name,

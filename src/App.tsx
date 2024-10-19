@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themes/theme';
 import GlobalStyle from './styles/GlobalStyles';
@@ -15,12 +15,14 @@ const App: React.FC = () => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const isInitialMount = useRef(true);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
 
   const fetchHeroesData = async (pageNumber: number) => {
+    if (loading) return;
     setLoading(true);
     try {
       const newHeroes = await fetchHeroes(pageNumber);
@@ -28,8 +30,9 @@ const App: React.FC = () => {
       setHasMore(newHeroes.length > 0);
     } catch (error) {
       console.error('Erro ao buscar heróis: ', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleScroll = debounce(() => {
@@ -44,6 +47,11 @@ const App: React.FC = () => {
   }, 200);
 
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     fetchHeroesData(page);
   }, [page]);
 
@@ -53,7 +61,7 @@ const App: React.FC = () => {
   }, [loading, hasMore]);
 
   return (
-    <ThemeProvider theme={isDarkMode ? lightTheme : darkTheme}>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <HeroList heroes={heroes} />
