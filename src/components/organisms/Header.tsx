@@ -1,3 +1,4 @@
+// Header.tsx
 import React from "react";
 import styled from "styled-components";
 import Logo from "../atoms/Logo";
@@ -19,19 +20,20 @@ const HeaderWrapper = styled.header`
 const IconsWrapper = styled.div`
   display: flex;
   gap: 10px;
-`
+`;
 
 interface HeaderProps {
   isDarkMode: boolean;
   toggleTheme: () => void;
+  setSearchTerm: (term: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
+const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme, setSearchTerm }) => {
   return (
     <HeaderWrapper>
       <Logo />
       <IconsWrapper>
-        <SearchBar />
+        <SearchBar setSearchTerm={setSearchTerm} /> {}
         <LikedHeroes />
         <DarkModeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       </IconsWrapper>

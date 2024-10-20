@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { FaSearch } from 'react-icons/fa'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FaSearch } from 'react-icons/fa';
 
 const SearchButton = styled.button`
   background: none;
@@ -30,8 +30,16 @@ const SearchBarWrapper = styled.div`
   align-items: center;
 `;
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+  setSearchTerm: (term: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchTerm }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <SearchBarWrapper>
@@ -42,9 +50,10 @@ const SearchBar: React.FC = () => {
         type='text'
         placeholder='Buscar...'
         isOpen={isOpen}
+        onChange={handleInputChange}
       />
     </SearchBarWrapper>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;
